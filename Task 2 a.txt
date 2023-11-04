@@ -1,0 +1,286 @@
+mysql> use hahaha;
+Database changed
+mysql> drop table college;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_hahaha |
++------------------+
+| calendar         |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> drop table calendar;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> create database college;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use college;
+Database changed
+mysql> create table studentprofile(rollno int,name varchar(20),dob date,department varchar(10),city varchar(20));
+Query OK, 0 rows affected (0.05 sec)
+
+
+mysql> create table marks(rollno int, name varchar(20),mark1 int,mark2 int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into studentprofile values(1001,'vijayan','2023-02-06','bca','pudukkottai');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into studentprofile values(1002,'immanuvel','2002-07-05','bca','viralimalai'),(1003,'donic','2002-07-20','bca','illupur'),(1004,'anwar','2002-11-23','bca','mukkanamalaippatti'),(1005,'bala','2002-08-23','bca','annavasal');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentprofile;
++--------+-----------+------------+------------+--------------------+
+| rollno | name      | dob        | department | city               |
++--------+-----------+------------+------------+--------------------+
+|   1001 | vijayan   | 2023-02-06 | bca        | pudukkottai        |
+|   1002 | immanuvel | 2002-07-05 | bca        | viralimalai        |
+|   1003 | donic     | 2002-07-20 | bca        | illupur            |
+|   1004 | anwar     | 2002-11-23 | bca        | mukkanamalaippatti |
+|   1005 | bala      | 2002-08-23 | bca        | annavasal          |
++--------+-----------+------------+------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into marks values(1001,'vijayan',80,100),(1002,'immanuvel',89,100),(1003,'donic',85,100),(1004,'anwar',70,100),(1005,'bala',80,100);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-----------+-------+-------+
+| rollno | name      | mark1 | mark2 |
++--------+-----------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |
+|   1002 | immanuvel |    89 |   100 |
+|   1003 | donic     |    85 |   100 |
+|   1004 | anwar     |    70 |   100 |
+|   1005 | bala      |    80 |   100 |
++--------+-----------+-------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> alter table marks add column total int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |  NULL |
+|   1002 | immanuvel |    89 |   100 |  NULL |
+|   1003 | donic     |    85 |   100 |  NULL |
+|   1004 | anwar     |    70 |   100 |  NULL |
+|   1005 | bala      |    80 |   100 |  NULL |
++--------+-----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> alter table studentprofile rename column dob to dateofbirth;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studentprofile;
++--------+-----------+-------------+------------+--------------------+
+| rollno | name      | dateofbirth | department | city               |
++--------+-----------+-------------+------------+--------------------+
+|   1001 | vijayan   | 2023-02-06  | bca        | pudukkottai        |
+|   1002 | immanuvel | 2002-07-05  | bca        | viralimalai        |
+|   1003 | donic     | 2002-07-20  | bca        | illupur            |
+|   1004 | anwar     | 2002-11-23  | bca        | mukkanamalaippatti |
+|   1005 | bala      | 2002-08-23  | bca        | annavasal          |
++--------+-----------+-------------+------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |  NULL |
+|   1002 | immanuvel |    89 |   100 |  NULL |
+|   1003 | donic     |    85 |   100 |  NULL |
+|   1004 | anwar     |    70 |   100 |  NULL |
+|   1005 | bala      |    80 |   100 |  NULL |
++--------+-----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| marks             |
+| studentprofile    |
++-------------------+
+2 rows in set (0.01 sec)
+
+
++---------------+
+| mark1 + mark2 |
++---------------+
+|           180 |
+|           189 |
+|           185 |
+|           170 |
+|           180 |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |  NULL |
+|   1002 | immanuvel |    89 |   100 |  NULL |
+|   1003 | donic     |    85 |   100 |  NULL |
+|   1004 | anwar     |    70 |   100 |  NULL |
+|   1005 | bala      |    80 |   100 |  NULL |
++--------+-----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> update marks set total=(mark1 + mark2) where rollno=1001;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=(mark1 + mark2) where rollno=1002;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=(mark1 + mark2) where rollno=1003;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update marks set total=(mark1 + mark2) where rollno=1004;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> 
+mysql> update marks set total=(mark1 + mark2) where rollno=1005;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |   180 |
+|   1002 | immanuvel |    89 |   100 |   189 |
+|   1003 | donic     |    85 |   100 |   185 |
+|   1004 | anwar     |    70 |   100 |   170 |
+|   1005 | bala      |    80 |   100 |   180 |
++--------+-----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from marks where rollno=4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |   180 |
+|   1002 | immanuvel |    89 |   100 |   189 |
+|   1003 | donic     |    85 |   100 |   185 |
+|   1004 | anwar     |    70 |   100 |   170 |
+|   1005 | bala      |    80 |   100 |   180 |
++--------+-----------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from marks where rollno=	1004;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from marks;
++--------+-----------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total |
++--------+-----------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |   180 |
+|   1002 | immanuvel |    89 |   100 |   189 |
+|   1003 | donic     |    85 |   100 |   185 |
+|   1005 | bala      |    80 |   100 |   180 |
++--------+-----------+-------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentprofile;
++--------+-----------+-------------+------------+--------------------+
+| rollno | name      | dateofbirth | department | city               |
++--------+-----------+-------------+------------+--------------------+
+|   1001 | vijayan   | 2023-02-06  | bca        | pudukkottai        |
+|   1002 | immanuvel | 2002-07-05  | bca        | viralimalai        |
+|   1003 | donic     | 2002-07-20  | bca        | illupur            |
+|   1004 | anwar     | 2002-11-23  | bca        | mukkanamalaippatti |
+|   1005 | bala      | 2002-08-23  | bca        | annavasal          |
++--------+-----------+-------------+------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from studentprofile where rollno=1004;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentprofile;
++--------+-----------+-------------+------------+-------------+
+| rollno | name      | dateofbirth | department | city        |
++--------+-----------+-------------+------------+-------------+
+|   1001 | vijayan   | 2023-02-06  | bca        | pudukkottai |
+|   1002 | immanuvel | 2002-07-05  | bca        | viralimalai |
+|   1003 | donic     | 2002-07-20  | bca        | illupur     |
+|   1005 | bala      | 2002-08-23  | bca        | annavasal   |
++--------+-----------+-------------+------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table marks add column average int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table marks add column grade char(1);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select rollno,avg(total) from marks group by rollno;
++--------+------------+
+| rollno | avg(total) |
++--------+------------+
+|   1001 |   180.0000 |
+|   1002 |   189.0000 |
+|   1003 |   185.0000 |
+|   1005 |   180.0000 |
++--------+------------+
+4 rows in set (0.01 sec)
+
+mysql> alter table marks drop column average;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks
+    -> ;
++--------+-----------+-------+-------+-------+-------+
+| rollno | name      | mark1 | mark2 | total | grade |
++--------+-----------+-------+-------+-------+-------+
+|   1001 | vijayan   |    80 |   100 |   180 | NULL  |
+|   1002 | immanuvel |    89 |   100 |   189 | NULL  |
+|   1003 | donic     |    85 |   100 |   185 | NULL  |
+|   1005 | bala      |    80 |   100 |   180 | NULL  |
++--------+-----------+-------+-------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select name,mark1,if(mark1 > 35,"PASS","FAIL") As grade from marks;
++-----------+-------+-------+
+| name      | mark1 | grade |
++-----------+-------+-------+
+| vijayan   |    80 | PASS  |
+| immanuvel |    89 | PASS  |
+| donic     |    85 | PASS  |
+| bala      |    80 | PASS  |
++-----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql>mysql> drop table marks;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select * from marks;
+ERROR 1146 (42S02): Table 'college.marks' doesn't exist
+mysql>

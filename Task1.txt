@@ -1,0 +1,322 @@
+mysql> create database Hotel;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| hahaha             |
+| hotel              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> use Hotel;
+Database changed
+mysql> create table Hotel(HotelNo varchar(25),HotelName varchar(25),City varchar(25));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> describe table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> describe Hotel;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| HotelNo   | varchar(25) | YES  |     | NULL    |       |
+| HotelName | varchar(25) | YES  |     | NULL    |       |
+| City      | varchar(25) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table Room(RoomNo char(5), HotelNo int, Type varchar(20), Price int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> describe Room;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RoomNo  | char(5)     | YES  |     | NULL    |       |
+| HotelNo | int         | YES  |     | NULL    |       |
+| Type    | varchar(20) | YES  |     | NULL    |       |
+| Price   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table Booking(HotelNo int,GuestNo int,DateFrom date,DateTo date,RoomNo int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> describe Booking;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| HotelNo  | int  | YES  |     | NULL    |       |
+| GuestNo  | int  | YES  |     | NULL    |       |
+| DateFrom | date | YES  |     | NULL    |       |
+| DateTo   | date | YES  |     | NULL    |       |
+| RoomNo   | int  | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> craete table Guest(GuestNo int,GuestName varchar(20),GuestAddress varchar(25));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'craete table Guest(GuestNo int,GuestName varchar(20),GuestAddress varchar(25))' at line 1
+mysql> create table Guest(GuestNo int,GuestName varchar(20),GuestAddress varchar(25));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> describe Guest;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| GuestNo      | int         | YES  |     | NULL    |       |
+| GuestName    | varchar(20) | YES  |     | NULL    |       |
+| GuestAddress | varchar(25) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table Hotel modify HotelNo int;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into Hotel(1,"Frenchfry","French"),(2,"All in One","US"),(3,"BlueMoon","Miami");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,"Frenchfry","French"),(2,"All in One","US"),(3,"BlueMoon","Miami")' at line 1
+mysql> insert into Hotel(1,"Frenchfry","French"),(2,"AllinOne","US"),(3,"BlueMoon","Miami"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,"Frenchfry","French"),(2,"AllinOne","US"),(3,"BlueMoon","Miami"))' at line 1
+mysql> insert into Hotel(1,"Frenchfry","French");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,"Frenchfry","French")' at line 1
+mysql> insert into Hotel(01,"Frenchfry","French");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '01,"Frenchfry","French")' at line 1
+mysql> insert into Hotel values(01,"Frenchfry","French");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Hotel values(2,"All in one","Florida");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Hotel values(3,"Blue Moon","Miami");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Hotel values(4,"Feel Fly","California");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Hotel values(5,"Day In Minutes","San Diago");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Hotel;
++---------+----------------+------------+
+| HotelNo | HotelName      | City       |
++---------+----------------+------------+
+|       1 | Frenchfry      | French     |
+|       2 | All in one     | Florida    |
+|       3 | Blue Moon      | Miami      |
+|       4 | Feel Fly       | California |
+|       5 | Day In Minutes | San Diago  |
++---------+----------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into Room values(1001,1,"Family",29,000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into Room values(1001,1,"Family",29000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Room values(1002,2,"Family",19000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Room values(1003,3,"Guest",39000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Room values(1004,4,"One Bet",49000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Room values(1005,5,"Family",39000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Room;
++--------+---------+---------+-------+
+| RoomNo | HotelNo | Type    | Price |
++--------+---------+---------+-------+
+| 1001   |       1 | Family  | 29000 |
+| 1002   |       2 | Family  | 19000 |
+| 1003   |       3 | Guest   | 39000 |
+| 1004   |       4 | One Bet | 49000 |
+| 1005   |       5 | Family  | 39000 |
++--------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into Booking values(1,10,'2023-02-01','2023-05-30',1001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Booking values(2,5,'2024-02-01','2024-05-30',1002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Booking values(3,1,'2024-01-01','2024-011-30',1003);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Booking values(4,2,'2024-02-014','2024-02-15',1004);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Booking values(5,6,'2025-02-01','2025-02-30',1005);
+ERROR 1292 (22007): Incorrect date value: '2025-02-30' for column 'DateTo' at row 1
+mysql> insert into Booking values(5,6,'2025-02-02','2025-02-28',1005);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> selcet * from Booking;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selcet * from Booking' at line 1
+mysql> select * from Booking;
++---------+---------+------------+------------+--------+
+| HotelNo | GuestNo | DateFrom   | DateTo     | RoomNo |
++---------+---------+------------+------------+--------+
+|       1 |      10 | 2023-02-01 | 2023-05-30 |   1001 |
+|       2 |       5 | 2024-02-01 | 2024-05-30 |   1002 |
+|       3 |       1 | 2024-01-01 | 2024-11-30 |   1003 |
+|       4 |       2 | 2024-02-14 | 2024-02-15 |   1004 |
+|       5 |       6 | 2025-02-02 | 2025-02-28 |   1005 |
++---------+---------+------------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into Guest values(10,'Aerora','Miammi-US');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Guest values(10,'Adam','Florida-US');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Guest values(10,'Emma','California-US');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Guest values(10,'Billy_elish,John','San Diago-US');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Guest values(2,'John','San Diago-US');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Guest;
++---------+------------------+---------------+
+| GuestNo | GuestName        | GuestAddress  |
++---------+------------------+---------------+
+|      10 | Aerora           | Miammi-US     |
+|      10 | Adam             | Florida-US    |
+|      10 | Emma             | California-US |
+|      10 | Billy_elish,John | San Diago-US  |
+|       2 | John             | San Diago-US  |
++---------+------------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update Guest set GuestNO=2 where GuestName='Billy_elish,John';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Guest set GuestNO=1 where GuestName='Emma';e
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e' at line 1
+mysql> select * from Guest;
++---------+------------------+---------------+
+| GuestNo | GuestName        | GuestAddress  |
++---------+------------------+---------------+
+|      10 | Aerora           | Miammi-US     |
+|      10 | Adam             | Florida-US    |
+|       1 | Emma             | California-US |
+|       2 | Billy_elish,John | San Diago-US  |
+|       2 | John             | San Diago-US  |
++---------+------------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update Room set Price=(*15%) where Type='Family';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*15%) where Type='Family'' at line 1
+mysql> update Room set Price=29000*15% where Type='Family';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where Type='Family'' at line 1
+mysql> update Room set Price=(29000)+*15% where Type='Family';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*15% where Type='Family'' at line 1
+mysql> update Room set Price=(29000+4350) where Type='Family';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from Room;
++--------+---------+---------+-------+
+| RoomNo | HotelNo | Type    | Price |
++--------+---------+---------+-------+
+| 1001   |       1 | Family  | 33350 |
+| 1002   |       2 | Family  | 33350 |
+| 1003   |       3 | Guest   | 39000 |
+| 1004   |       4 | One Bet | 49000 |
+| 1005   |       5 | Family  | 33350 |
++--------+---------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table Room add column AC varchar(10);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Room;
++--------+---------+---------+-------+------+
+| RoomNo | HotelNo | Type    | Price | AC   |
++--------+---------+---------+-------+------+
+| 1001   |       1 | Family  | 33350 | NULL |
+| 1002   |       2 | Family  | 33350 | NULL |
+| 1003   |       3 | Guest   | 39000 | NULL |
+| 1004   |       4 | One Bet | 49000 | NULL |
+| 1005   |       5 | Family  | 33350 | NULL |
++--------+---------+---------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> update Room set AC='non-ac' where RoomNo=1001;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Room set AC='ac' where RoomNo=1002;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Room set AC='ac' where RoomNo=1003;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Room set AC='non-ac' where RoomNo=1004;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Room set AC='ac' where RoomNo=1005;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Room;
++--------+---------+---------+-------+--------+
+| RoomNo | HotelNo | Type    | Price | AC     |
++--------+---------+---------+-------+--------+
+| 1001   |       1 | Family  | 33350 | non-ac |
+| 1002   |       2 | Family  | 33350 | ac     |
+| 1003   |       3 | Guest   | 39000 | ac     |
+| 1004   |       4 | One Bet | 49000 | non-ac |
+| 1005   |       5 | Family  | 33350 | ac     |
++--------+---------+---------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Hotel;
++---------+----------------+------------+
+| HotelNo | HotelName      | City       |
++---------+----------------+------------+
+|       1 | Frenchfry      | French     |
+|       2 | All in one     | Florida    |
+|       3 | Blue Moon      | Miami      |
+|       4 | Feel Fly       | California |
+|       5 | Day In Minutes | San Diago  |
++---------+----------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Room;
++--------+---------+---------+-------+--------+
+| RoomNo | HotelNo | Type    | Price | AC     |
++--------+---------+---------+-------+--------+
+| 1001   |       1 | Family  | 33350 | non-ac |
+| 1002   |       2 | Family  | 33350 | ac     |
+| 1003   |       3 | Guest   | 39000 | ac     |
+| 1004   |       4 | One Bet | 49000 | non-ac |
+| 1005   |       5 | Family  | 33350 | ac     |
++--------+---------+---------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> notee

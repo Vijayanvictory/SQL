@@ -1,0 +1,175 @@
+mysql> create table studentprofile(rollno int, name varchar(20), dob date, department varchar(20), city varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into studentprofile values(1001,'ajith','2002-06-05','Full stack','Salem');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into studentprofile values(1002,'mani','2002-07-10','Full stack','karaikkudi');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentprofile values( 1003,' saran ',' 1998-02-23 ',' Full satck ','dindigul');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into studentprofile values( 1004,' sankar ',' 1996-02-23 ',' Full satck ','theni');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into studentprofile values( 1005,' ashok ',' 1995-02-13 ',' Full satck ','gova');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> create table marks(rollno int, name varchar(20), mark1 int, mark2 int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into marks values( 1001,' ashok ',90,89),(1002,'mani',80,89),(1003,'saran',97,
+80),(1004,'ajith',98,89),(1005,'sankar',34,90);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> alter table marks add total int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table studentprofile rename column dob to dateofbirth;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentprofile;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| rollno      | int         | YES  |     | NULL    |       |
+| name        | varchar(20) | YES  |     | NULL    |       |
+| dateofbirth | date        | YES  |     | NULL    |       |
+| department  | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc marks;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| mark1  | int         | YES  |     | NULL    |       |
+| mark2  | int         | YES  |     | NULL    |       |
+| total  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_kgm  |
++----------------+
+| bill           |
+| bills          |
+| cust           |
+| dept           |
+| emp            |
+| marks          |
+| product        |
+| sem1           |
+| student        |
+| studentprofile |
++----------------+
+10 rows in set (0.00 sec)
+
+mysql> update marks set total = mark1 + mark2;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from marks;
++--------+---------+-------+-------+-------+
+| rollno | name    | mark1 | mark2 | total |
++--------+---------+-------+-------+-------+
+|   1001 |  ashok  |    90 |    89 |   179 |
+|   1002 | mani    |    80 |    89 |   169 |
+|   1003 | saran   |    97 |    80 |   177 |
+|   1004 | ajith   |    98 |    89 |   187 |
+|   1005 | sankar  |    34 |    90 |   124 |
++--------+---------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from studentprofile where rollno=1004;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentprofile;
++--------+---------+-------------+--------------+------------+
+| rollno | name    | dateofbirth | department   | city       |
++--------+---------+-------------+--------------+------------+
+|   1001 | ajith   | 2002-06-05  | Full stack   | Salem      |
+|   1002 | mani    | 2002-07-10  | Full stack   | karaikkudi |
+|   1003 |  saran  | 1998-02-23  |  Full satck  | dindigul   |
+|   1005 |  ashok  | 1995-02-13  |  Full satck  | gova       |
++--------+---------+-------------+--------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table marks add average int,add grade char(1);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+---------+-------+-------+-------+---------+-------+
+| rollno | name    | mark1 | mark2 | total | average | grade |
++--------+---------+-------+-------+-------+---------+-------+
+|   1001 |  ashok  |    90 |    89 |   179 |    NULL | NULL  |
+|   1002 | mani    |    80 |    89 |   169 |    NULL | NULL  |
+|   1003 | saran   |    97 |    80 |   177 |    NULL | NULL  |
+|   1004 | ajith   |    98 |    89 |   187 |    NULL | NULL  |
+|   1005 | sankar  |    34 |    90 |   124 |    NULL | NULL  |
++--------+---------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set average = total/2;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from marks;
++--------+---------+-------+-------+-------+---------+-------+
+| rollno | name    | mark1 | mark2 | total | average | grade |
++--------+---------+-------+-------+-------+---------+-------+
+|   1001 |  ashok  |    90 |    89 |   179 |      90 | NULL  |
+|   1002 | mani    |    80 |    89 |   169 |      85 | NULL  |
+|   1003 | saran   |    97 |    80 |   177 |      89 | NULL  |
+|   1004 | ajith   |    98 |    89 |   187 |      94 | NULL  |
+|   1005 | sankar  |    34 |    90 |   124 |      62 | NULL  |
++--------+---------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> update marks set grade='p' where total>40;
+Query OK, 5 rows affected (0.02 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from marks;
++--------+---------+-------+-------+-------+---------+-------+
+| rollno | name    | mark1 | mark2 | total | average | grade |
++--------+---------+-------+-------+-------+---------+-------+
+|   1001 |  ashok  |    90 |    89 |   179 |      90 | p     |
+|   1002 | mani    |    80 |    89 |   169 |      85 | p     |
+|   1003 | saran   |    97 |    80 |   177 |      89 | p     |
+|   1004 | ajith   |    98 |    89 |   187 |      94 | p     |
+|   1005 | sankar  |    34 |    90 |   124 |      62 | p     |
++--------+---------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table marks drop column average;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+---------+-------+-------+-------+-------+
+| rollno | name    | mark1 | mark2 | total | grade |
++--------+---------+-------+-------+-------+-------+
+|   1001 |  ashok  |    90 |    89 |   179 | p     |
+|   1002 | mani    |    80 |    89 |   169 | p     |
+|   1003 | saran   |    97 |    80 |   177 | p     |
+|   1004 | ajith   |    98 |    89 |   187 | p     |
+|   1005 | sankar  |    34 |    90 |   124 | p     |
++--------+---------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from marks;
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> select * from marks;
+Empty set (0.00 sec)

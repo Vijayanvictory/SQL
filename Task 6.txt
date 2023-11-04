@@ -1,0 +1,59 @@
+mysql> create table sailor(sid int primary key auto_increment, name varchar(20) not null, do
+b date, gender varchar(10));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table boat(bid int primary key auto_increment, btype varchar(10) not null, bname varchar(20), color varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table sails(sid int, bid int, dot date, shift varchar(5), foreign key(sid) references sailor(sid),foreign key(bid) references boat(bid));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into sailor values(1001,'Briton','1999-09-11','male'),(1002,'john','1989-05-24','male'),(1003,'jack','2000-09-23','male'),(1004,'ola','1980-01-04','male'),(1005,'jeny','2000-08-03','male');
+Query OK, 5 row affected (0.02 sec)
+
+
+mysql> select * from sailor;
++------+--------+------------+--------+
+| sid  | name   | dob        | gender |
++------+--------+------------+--------+
+| 1001 | Briton | 1999-09-11 | male   |
+| 1002 | john   | 1989-05-24 | male   |
+| 1003 | jack   | 2000-09-23 | male   |
+| 1004 | ola    | 1980-01-04 | male   |
+| 1005 | jeny   | 2000-08-03 | male   |
++------+--------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into boat (btype,bname,color) values('Deluxe','mexic','red'),('Super Deluxe','ameron','blue'),('Super Deluxe','speed fly','white'),('Deluxe','airon','grey'),('Deluxe','allover','green');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from boat;
++-----+--------------+-----------+-------+
+| bid | btype        | bname     | color |
++-----+--------------+-----------+-------+
+|   6 | Deluxe       | mexic     | red   |
+|   7 | Super Deluxe | ameron    | blue  |
+|   8 | Super Deluxe | speed fly | white |
+|   9 | Deluxe       | airon     | grey  |
+|  10 | Deluxe       | allover   | green |
++-----+--------------+-----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into sails values(1001,6,'2010-04-23','FN'),(1002,7,'2022-05-21','AN'),(1003,8,'2022-08-26','AN'),(1004,9,'2022-09-03','FN'),(1005,10,'2023-03-25','AN');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from sails;
++------+------+------------+-------+
+| sid  | bid  | dot        | shift |
++------+------+------------+-------+
+| 1001 |    6 | 2010-04-23 | FN    |
+| 1002 |    7 | 2022-05-21 | AN    |
+| 1003 |    8 | 2022-08-26 | AN    |
+| 1004 |    9 | 2022-09-03 | FN    |
+| 1004 |   10 | 2023-03-25 | AN    |
++------+------+------------+-------+
+5 rows in set (0.00 sec)
+
+

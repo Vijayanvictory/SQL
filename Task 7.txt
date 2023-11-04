@@ -1,0 +1,102 @@
+mysql> select * from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | Tom    | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+14 rows in set (0.00 sec)
+
+
+mysql> select * from dept;
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from grades;
++-------+--------+---------+
+| grade | lowsal | highsal |
++-------+--------+---------+
+|     1 |   4000 |    5000 |
+|     2 |   3000 |    5000 |
+|     3 |   2000 |    3000 |
+|     4 |   1000 |    2000 |
+|     5 |    500 |    1000 |
++-------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select emp.ename, emp.job, emp.sal, dept.dname, dept.deptno from emp inner join dept
+on emp.deptno = dept.deptno;
++--------+-----------+---------+------------+--------+
+| ename  | job       | sal     | dname      | deptno |
++--------+-----------+---------+------------+--------+
+| SMITH  | CLERK     |  800.00 | RESEARCH   |     20 |
+| ALLEN  | SALESMAN  | 1600.00 | SALES      |     30 |
+| WARD   | SALESMAN  | 1250.00 | SALES      |     30 |
+| JONES  | MANAGER   | 2975.00 | RESEARCH   |     20 |
+| MARTIN | SALESMAN  | 1250.00 | SALES      |     30 |
+| BLAKE  | MANAGER   | 2850.00 | SALES      |     30 |
+| CLARK  | MANAGER   | 2450.00 | ACCOUNTING |     10 |
+| SCOTT  | ANALYST   | 3000.00 | RESEARCH   |     20 |
+| KING   | PRESIDENT | 5000.00 | ACCOUNTING |     10 |
+| TURNER | SALESMAN  | 1500.00 | SALES      |     30 |
+| ADAMS  | CLERK     | 1100.00 | RESEARCH   |     20 |
+| JAMES  | CLERK     |  950.00 | SALES      |     30 |
+| FORD   | ANALYST   | 3000.00 | RESEARCH   |     20 |
+| Tom    | CLERK     | 1300.00 | ACCOUNTING |     10 |
++--------+-----------+---------+------------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select emp.ename, emp.job, dept.loc from emp inner join dept on emp.deptno = dept.deptno where loc='dallas';
++-------+---------+--------+
+| ename | job     | loc    |
++-------+---------+--------+
+| SMITH | CLERK   | DALLAS |
+| JONES | MANAGER | DALLAS |
+| SCOTT | ANALYST | DALLAS |
+| ADAMS | CLERK   | DALLAS |
+| FORD  | ANALYST | DALLAS |
++-------+---------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> select e.ename, e.job, e.sal, g.grade from emp e, grades g where e.sal between lowsal and highsal;
++--------+-----------+---------+-------+
+| ename  | job       | sal     | grade |
++--------+-----------+---------+-------+
+| SMITH  | CLERK     |  800.00 |     3 |
+| ALLEN  | SALESMAN  | 1600.00 |     3 |
+| WARD   | SALESMAN  | 1250.00 |     3 |
+| JONES  | MANAGER   | 2975.00 |     2 |
+| MARTIN | SALESMAN  | 1250.00 |     3 |
+| BLAKE  | MANAGER   | 2850.00 |     2 |
+| CLARK  | MANAGER   | 2450.00 |     2 |
+| SCOTT  | ANALYST   | 3000.00 |     2 |
+| KING   | PRESIDENT | 5000.00 |     1 |
+| TURNER | SALESMAN  | 1500.00 |     3 |
+| ADAMS  | CLERK     | 1100.00 |     3 |
+| JAMES  | CLERK     |  950.00 |     3 |
+| FORD   | ANALYST   | 3000.00 |     2 |
+| Tom    | CLERK     | 1300.00 |     3 |
++--------+-----------+---------+-------+
+14 rows in set (0.00 sec)
+
+

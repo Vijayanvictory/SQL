@@ -1,0 +1,184 @@
+mysql> create table student(name varchar(20), age int, score int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> create table customer(customer_id int, first_name varchar(50), last_name varchar(50), date_of_birth date, address text, phone_number int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc customer;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| customer_id   | int         | YES  |     | NULL    |       |
+| first_name    | varchar(50) | YES  |     | NULL    |       |
+| last_name     | varchar(50) | YES  |     | NULL    |       |
+| date_of_birth | date        | YES  |     | NULL    |       |
+| address       | text        | YES  |     | NULL    |       |
+| phone_number  | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table order_details(order_id int, customer_id int, order_datetime datetime, shipped_da
+tetime datetime, total_amount float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc order_details;
++------------------+----------+------+-----+---------+-------+
+| Field            | Type     | Null | Key | Default | Extra |
++------------------+----------+------+-----+---------+-------+
+| order_id         | int      | YES  |     | NULL    |       |
+| customer_id      | int      | YES  |     | NULL    |       |
+| order_datetime   | datetime | YES  |     | NULL    |       |
+| shipped_datetime | datetime | YES  |     | NULL    |       |
+| total_amount     | float    | YES  |     | NULL    |       |
++------------------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> create table players(name varchar(10),age int, score int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into players values('Ram',28,30),('suresh',21,70);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from players;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Ram    |   28 |    30 |
+| suresh |   21 |    70 |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from players where name='suresh';
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| suresh |   21 |    70 |
++--------+------+-------+
+1 row in set (0.03 sec)
+
+mysql>
+
+mysql> insert into players values('Raja',28,60);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from players;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Ram    |   28 |    30 |
+| suresh |   21 |    70 |
+| Raja   |   28 |    60 |
++--------+------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into players values('prem',28,30),('sunil',21,70),('viky',20,86);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from players;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Ram    |   28 |    30 |
+| suresh |   21 |    70 |
+| Raja   |   28 |    60 |
+| prem   |   28 |    30 |
+| sunil  |   21 |    70 |
+| viky   |   20 |    86 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> update players set age=30 where name='sunil';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from players;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Ram    |   28 |    30 |
+| suresh |   21 |    70 |
+| Raja   |   28 |    60 |
+| prem   |   28 |    30 |
+| sunil  |   30 |    70 |
+| viky   |   20 |    86 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> delete from players where name='prem';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from players;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| Ram    |   28 |    30 |
+| suresh |   21 |    70 |
+| Raja   |   28 |    60 |
+| sunil  |   30 |    70 |
+| viky   |   20 |    86 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table players add column strike_rate decimal(4,2);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from players;
++--------+------+-------+-------------+
+| name   | age  | score | strike_rate |
++--------+------+-------+-------------+
+| Ram    |   28 |    30 |        NULL |
+| suresh |   21 |    70 |        NULL |
+| Raja   |   28 |    60 |        NULL |
+| sunil  |   30 |    70 |        NULL |
+| viky   |   20 |    86 |        NULL |
++--------+------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select name,age from players;
++--------+------+
+| name   | age  |
++--------+------+
+| Ram    |   28 |
+| suresh |   21 |
+| Raja   |   28 |
+| sunil  |   30 |
+| viky   |   20 |
++--------+------+
+5 rows in set (0.00 sec)
+
+mysql> alter table players rename column name to full_name;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from players;
++-----------+------+-------+-------------+
+| full_name | age  | score | strike_rate |
++-----------+------+-------+-------------+
+| Ram       |   28 |    30 |        NULL |
+| suresh    |   21 |    70 |        NULL |
+| Raja      |   28 |    60 |        NULL |
+| sunil     |   30 |    70 |        NULL |
+| viky      |   20 |    86 |        NULL |
++-----------+------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> drop table players
+    -> ;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from players;
+ERROR 1146 (42S02): Table 'hahaha.players' doesn't exist
+mysql>
